@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Orders</title>
+
+<script>
+if (localStorage.getItem("isAdmin") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    margin:0;
+}
+
+/* HEADER */
+.header{
+    background:#e23744;
+    color:white;
+    padding:5px 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.back-btn{
+    background:white;
+    color:#e23744;
+    border:none;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.card{
+    width:220px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* CHART */
+.chart-box{
+    width:320px;
+    margin:25px auto;
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.chart-box canvas{
+    max-height:220px;
+}
+
+/* TABLE */
+.table-container{
+    width:90%;
+    margin:30px auto;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    max-height:400px;
+    overflow-y:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:#eee;
+    position:sticky;
+    top:0;
+}
+
+/* BUTTONS */
+button{
+    padding:6px 10px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.update-btn{
+    background:#ddd;
+}
+
+.delete-btn{
+    background:red;
+    color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <h2>📦 All Orders</h2>
+
+    <button class="back-btn" onclick="goDashboard()">
+        ⬅ Back
+    </button>
+
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+
+    <div class="card">
+        <h2>Total Orders</h2>
+        <p id="totalOrders">0</p>
+    </div>
+
+    <div class="card">
+        <h2>Placed</h2>
+        <p id="placedCount">0</p>
+    </div>
+
+    <div class="card">
+        <h2>Preparing</h2>
+        <p id="preparingCount">0</p>
+    </div>
+
+    <div class="card">
+        <h2>Delivered</h2>
+        <p id="deliveredCount">0</p>
+    </div>
+
+</div>
+
+<!-- CHART -->
+<div class="chart-box">
+
+    <h3 style="text-align:center;">
+        Order Status
+    </h3>
+
+    <canvas id="pieChart"></canvas>
+
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+    <th>Item</th>
+    <th>Restaurant</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+</thead>
+
+<tbody id="orderTable"></tbody>
+
+</table>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+let pieChart;
+
+
+// -----------------------
+// LOAD ORDERS
+// -----------------------
+async function loadOrders() {
+
+    try {
+
+        let res = await fetch("http://127.0.0.1:8000/orders");
+
+        let data = await res.json();
+
+        let table = document.getElementById("orderTable");
+
+        table.innerHTML = "";
+
+        let placed = 0;
+        let delivered = 0;
+        let preparing = 0;
+
+
+        data.reverse().forEach(o => {
+
+            // COUNT
+            if (o.status === "placed") placed++;
+
+            if (o.status === "preparing") preparing++;
+
+            if (o.status === "delivered") delivered++;
+
+
+            let tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${o.item}</td>
+
+                <td>${o.restaurant}</td>
+
+                <td>
+                    <select id="s-${o.id}">
+                        <option ${o.status=="placed"?"selected":""}>
+                            placed
+                        </option>
+
+                        <option ${o.status=="preparing"?"selected":""}>
+                            preparing
+                        </option>
+
+                        <option ${o.status=="delivered"?"selected":""}>
+                            delivered
+                        </option>
+                    </select>
+                </td>
+
+                <td>
+                    <button class="update-btn"
+                        onclick="updateOrder(${o.id})">
+                        Update
+                    </button>
+
+                    <button class="delete-btn"
+                        onclick="deleteOrder(${o.id})">
+                        Delete
+                    </button>
+                </td>
+            `;
+
+            table.appendChild(tr);
+
+        });
+
+
+        // 🔥 UPDATE CARDS
+        document.getElementById("totalOrders").innerText = data.length;
+
+        document.getElementById("placedCount").innerText = placed;
+
+        document.getElementById("preparingCount").innerText = preparing;
+
+        document.getElementById("deliveredCount").innerText = delivered;
+
+
+        // 🔥 UPDATE CHART
+        loadPieChart(placed, preparing, delivered);
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+
+// -----------------------
+// PIE CHART
+// -----------------------
+function loadPieChart(placed, preparing, delivered){
+
+    let ctx = document.getElementById("pieChart").getContext("2d");
+
+    if (pieChart){
+        pieChart.destroy();
+    }
+
+    pieChart = new Chart(ctx, {
+
+        type:"pie",
+
+        data:{
+
+            labels:[
+                `Placed (${placed})`,
+                `Preparing (${preparing})`,
+                `Delivered (${delivered})`
+            ],
+
+            datasets:[{
+
+                data:[
+                    placed,
+                    preparing,
+                    delivered
+                ],
+
+                backgroundColor:[
+                    "orange",
+                    "blue",
+                    "green"
+                ]
+
+            }]
+        }
+
+    });
+
+}
+
+
+// -----------------------
+// UPDATE ORDER
+// -----------------------
+async function updateOrder(id){
+
+    let status = document.getElementById(`s-${id}`).value;
+
+    await fetch("http://127.0.0.1:8000/update-order",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            order_id:id,
+            status:status
+
+        })
+
+    });
+
+    loadOrders();
+
+}
+
+
+// -----------------------
+// DELETE ORDER
+// -----------------------
+async function deleteOrder(id){
+
+    if(!confirm("Delete this order?")) return;
+
+    await fetch(`http://127.0.0.1:8000/delete-order/${id}`,{
+
+        method:"DELETE"
+
+    });
+
+    loadOrders();
+
+}
+
+
+// -----------------------
+// BACK
+// -----------------------
+function goDashboard(){
+
+    window.location.href = "dashboard.html";
+
+}
+
+
+// -----------------------
+// INIT
+// -----------------------
+loadOrders();
+
+
+// 🔥 AUTO REFRESH
+setInterval(loadOrders,5000);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+version: "3.1"
+
+nlu:
+
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - good morning
+    - good evening
+
+- intent: order_food
+  examples: |
+    - order food
+    - i want food
+    - show restaurants
+    - hungry
+    - suggest food
+    - what can i eat
+
+    - i want [pizza](food_item)
+    - order [burger](food_item)
+    - get me [biryani](food_item)
+    - i want [south indian](food_item) food
+
+    - order [pizza](food_item) from [Pizza Hub](restaurant)
+    - get me [burger](food_item) from [Burger Point](restaurant)
+    - i want [biryani](food_item) from [Biryani House](restaurant)
+
+    - [pizza](food_item) from [Pizza Hub](restaurant)
+    - [burger](food_item) from [Burger Point](restaurant)
+
+    - show [pizza](food_item) restaurants
+    - i want to order [pizza](food_item)
+    - order [pizza](food_item)
+    - pizza please
+
+- intent: track_order
+  examples: |
+    - track order
+    - where is my order
+    - order status
+    - track my food
+
+- intent: complaint
+  examples: |
+    - i have a complaint
+    - bad service
+    - food was bad
+    - i want to complain
+
+- intent: bot_name
+  examples: |
+    - what is your name
+    - who are you
+    - tell me your name
+    - your name
+
+- intent: mood
+  examples: |
+    - how are you
+    - how are you?
+    - are you fine
+    - how is it going
+
+- intent: live_agent
+  examples: |
+    - connect me to customer support
+    - connect me to agent
+    - human support
+    - live support
+    - talk to human
+
+- intent: food_quality_issue
+  examples: |
+    - food quality issue
+    - food was bad
+    - stale food
+    - bad food quality
+
+- intent: payment_issue
+  examples: |
+    - payment issue
+    - payment failed
+    - money deducted
+
+- intent: wrong_item_issue
+  examples: |
+    - wrong item received
+    - wrong order
+    - received different food
+
+- intent: late_delivery_issue
+  examples: |
+    - late delivery
+    - delivery is late
+    - order delayed
+
+- intent: food_suggestion
+  examples: |
+    - suggest something to eat
+    - recommend food
+    - best food nearby
+    - what should i eat
+    - food recommendation
+
+- intent: offers
+  examples: |
+    - any offers
+    - show coupons
+    - discount available
+    - promo code
+    - cashback offers
+
+- intent: delivery_time
+  examples: |
+    - how much delivery time
+    - when will my order arrive
+    - estimated delivery
+    - delivery timing
+
+- intent: payment_methods
+  examples: |
+    - payment methods
+    - can i pay cash
+    - upi available
+    - card payment
+    - cash on delivery
+
+- intent: cancel_order
+  examples: |
+    - cancel my order
+    - i want to cancel order
+    - stop my order
+    - cancel food
+
+- intent: change_address
+  examples: |
+    - change delivery address
+    - update address
+    - wrong address
+    - edit delivery location
+
+- intent: rate_order
+  examples: |
+    - rate my order
+    - give feedback
+    - review order
+    - submit rating
+
+- intent: bot_capabilities
+  examples: |
+    - what can you do
+    - how can you help me
+    - what services do you provide
+
+- intent: fallback
+  examples: |
+    - asdasd
+    - qweqwe
+    - random text
+- intent: refund
+  examples: |
+    - i want refund
+    - refund my money
+    - money back
+    - i need refund
+    - return my payment
+    - refund amount
+    - order refund
+    - i did not receive refund
+
+- intent: order_again
+  examples: |
+    - order again
+    - reorder my last order
+    - repeat previous order
+    - same order again
+    - place previous order again
+
+- intent: delivery_partner
+  examples: |
+    - where is delivery boy
+    - delivery partner contact
+    - call delivery partner
+    - delivery agent number
+    - rider details
+
+- intent: restaurant_closed
+  examples: |
+    - restaurant is closed
+    - shop closed
+    - restaurant unavailable
+    - restaurant not accepting orders
+
+- intent: unavailable_item
+  examples: |
+    - item unavailable
+    - pizza not available
+    - burger unavailable
+    - food out of stock
+
+- intent: coupon_not_working
+  examples: |
+    - coupon not working
+    - promo code invalid
+    - discount failed
+    - cashback not applied
+
+- intent: account_issue
+  examples: |
+    - login problem
+    - account issue
+    - cannot login
+    - my account is blocked
+    - otp not coming
+
+- intent: thank_you
+  examples: |
+    - thanks
+    - thank you
+    - thanks a lot
+    - tysm
+    - thankyou
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - catch you later
+    - ok bye
+
+- intent: fallback
+  examples: |
+    - asdasd
+    - xyzxyz
+    - random text
+    - blah blah
+    - qwerty
+    - 123123
+    - nothing
+    - test
+    - sbbae
+
+- intent: food_quality_issue
+  examples: |
+    - food quality bad
+    - my food is bad
+    - food was cold
+    - stale food received
+    - i have issue with my food
+    - food quality issue
+    - bad food
+    - food taste is bad
+    - food is not fresh
+    - my food was not good
+
+- intent: wrong_item_issue
+  examples: |
+    - wrong item delivered
+    - i received wrong order
+    - wrong food received
+    - replace my order
+    - i want replace my order
+    - item is incorrect
+    - order item is wrong
+    - this is not my order
+    
+- intent: complaint
+  examples: |
+    - i have issue with my order
+    - i want to complain
+    - complaint
+    - bad service
+    - order issue
+    - i have a complaint
+    - i am unhappy
+- intent: cancel_order
+  examples: |
+    - cancel order
+    - cancel my order
+    - i want cancel my order
+    - stop my order
+    - do not deliver my order

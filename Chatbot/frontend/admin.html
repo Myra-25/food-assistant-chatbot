@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial; background:#f4f4f4; }
+        .box {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            background: #e23744;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box" id="loginBox">
+    <h2>Admin Login</h2>
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<div class="box" id="adminPanel" style="display:none;">
+    <h2>🧑‍💻 Admin Panel</h2>
+
+    <h3>Train Bot</h3>
+    <input id="question" placeholder="User question">
+    <input id="answer" placeholder="Bot answer">
+    <button onclick="train()">Train</button>
+
+    <h3>Actions</h3>
+    <button onclick="openDashboard()">Open Dashboard</button>
+</div>
+
+<script>
+
+async function login() {
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+
+    let res = await fetch(`http://127.0.0.1:8000/login?username=${user}&password=${pass}`, {
+        method: "POST"
+    });
+
+    let data = await res.json();
+
+    if (data.status === "success") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+    } else {
+        alert("Invalid login");
+    }
+}
+
+async function train() {
+    let q = document.getElementById("question").value;
+    let a = document.getElementById("answer").value;
+
+    alert("Training saved (demo)");
+}
+
+function openDashboard() {
+    window.open("dashboard.html", "_blank");
+}
+
+</script>
+
+</body>
+</html>

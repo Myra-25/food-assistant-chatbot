@@ -1,0 +1,152 @@
+version: "3.1"
+
+rules:
+
+- rule: Respond to greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Respond to order food
+  steps:
+  - intent: order_food
+  - action: utter_order_food
+
+- rule: Respond to track order
+  steps:
+  - intent: track_order
+  - action: utter_track_order
+
+- rule: Respond to complaint
+  steps:
+  - intent: complaint
+  - action: utter_complaint
+
+- rule: Fallback rule
+  steps:
+  - intent: fallback
+  - action: utter_fallback
+
+- rule: bot name
+  steps:
+  - intent: bot_name
+  - action: utter_bot_name
+
+- rule: mood
+  steps:
+  - intent: mood
+  - action: utter_mood
+
+- rule: live support
+  steps:
+  - intent: live_agent
+  - action: utter_live_agent
+
+- rule: food quality
+  steps:
+  - intent: food_quality_issue
+  - action: utter_food_quality_issue
+
+- rule: payment issue
+  steps:
+  - intent: payment_issue
+  - action: utter_payment_issue
+- rule: fallback response
+
+  steps:
+    - intent: fallback
+    - action: utter_fallback
+- rule: wrong item
+  steps:
+  - intent: wrong_item_issue
+  - action: utter_wrong_item_issue
+
+- rule: late delivery
+  steps:
+  - intent: late_delivery_issue
+  - action: utter_late_delivery_issue
+
+- rule: food suggestion
+  steps:
+  - intent: food_suggestion
+  - action: utter_food_suggestion
+
+- rule: offers
+  steps:
+  - intent: offers
+  - action: utter_offers
+
+- rule: delivery time
+  steps:
+  - intent: delivery_time
+  - action: utter_delivery_time
+
+- rule: payment methods
+  steps:
+  - intent: payment_methods
+  - action: utter_payment_methods
+
+- rule: cancel order
+  steps:
+  - intent: cancel_order
+  - action: utter_cancel_order
+
+- rule: change address
+  steps:
+  - intent: change_address
+  - action: utter_change_address
+
+- rule: rate order
+  steps:
+  - intent: rate_order
+  - action: utter_rate_order
+
+- rule: bot capabilities
+  steps:
+  - intent: bot_capabilities
+  - action: utter_bot_capabilities
+
+- rule: refund
+  steps:
+  - intent: refund
+  - action: utter_refund
+
+- rule: order again
+  steps:
+  - intent: order_again
+  - action: utter_order_again
+
+- rule: delivery partner
+  steps:
+  - intent: delivery_partner
+  - action: utter_delivery_partner
+
+- rule: restaurant closed
+  steps:
+  - intent: restaurant_closed
+  - action: utter_restaurant_closed
+
+- rule: unavailable item
+  steps:
+  - intent: unavailable_item
+  - action: utter_unavailable_item
+
+- rule: coupon issue
+  steps:
+  - intent: coupon_not_working
+  - action: utter_coupon_not_working
+
+- rule: account issue
+  steps:
+  - intent: account_issue
+  - action: utter_account_issue
+
+- rule: thank you
+  steps:
+  - intent: thank_you
+  - action: utter_thank_you
+
+- rule: goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye

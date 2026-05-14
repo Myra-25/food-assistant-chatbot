@@ -1,0 +1,11 @@
+venv/
+rasa_env/
+__pycache__/
+models/
+.rasa/
+*.db
+.idea/
+
+dir/rasa_env/
+Chatbot/venv/
+dir/models/

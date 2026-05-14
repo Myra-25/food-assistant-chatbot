@@ -1,0 +1,38 @@
+version: "3.1"
+
+stories:
+
+# -------------------------------
+# GREET
+# -------------------------------
+- story: greet path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+
+# -------------------------------
+# ORDER FOOD
+# -------------------------------
+- story: order food path
+  steps:
+  - intent: order_food
+  - action: utter_order_food
+
+
+# -------------------------------
+# TRACK ORDER
+# -------------------------------
+- story: track order path
+  steps:
+  - intent: track_order
+  - action: utter_track_order
+
+
+# -------------------------------
+# COMPLAINT
+# -------------------------------
+- story: complaint path
+  steps:
+  - intent: complaint
+  - action: utter_complaint

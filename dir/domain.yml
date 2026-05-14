@@ -1,0 +1,140 @@
+version: "3.1"
+
+intents:
+  - greet
+  - order_food
+  - track_order
+  - complaint
+  - bot_name
+  - mood
+  - live_agent
+  - food_quality_issue
+  - payment_issue
+  - wrong_item_issue
+  - late_delivery_issue
+  - food_suggestion
+  - offers
+  - delivery_time
+  - payment_methods
+  - cancel_order
+  - change_address
+  - rate_order
+  - bot_capabilities
+  - fallback
+  - refund
+  - order_again
+  - delivery_partner
+  - restaurant_closed
+  - unavailable_item
+  - coupon_not_working
+  - account_issue
+  - thank_you
+  - goodbye
+
+actions:
+  - action_track_order
+
+entities:
+  - food_item
+  - restaurant
+
+responses:
+
+  utter_greet:
+    - text: "Hey 👋 Welcome to Food Assistant! How can I help you today?"
+
+  utter_order_food:
+    - text: "🍽 You can browse restaurants using the Order button below."
+
+  utter_track_order:
+    - text: "📦 Checking your latest order status..."
+
+  utter_complaint:
+    - text: "⚠️ Please tell me what issue you are facing."
+
+  utter_bot_name:
+    - text: "🤖 I'm your Food Assistant Bot."
+
+  utter_mood:
+    - text: "😊 I'm doing great! Hope you're having a good day too."
+
+  utter_live_agent:
+    - text: "👨‍💼 Connecting you with customer support. Please wait..."
+
+  utter_food_quality_issue:
+    - text: "😔 Sorry about the food quality issue. We've raised a complaint request."
+
+  utter_payment_issue:
+    - text: "💳 We detected a payment-related issue. Our support team will contact you soon."
+
+  utter_wrong_item_issue:
+    - text: "🍔 Sorry, it seems the wrong item was delivered. Replacement request submitted."
+
+  utter_late_delivery_issue:
+    - text: "🚚 Sorry for the delay. We’re working to improve delivery speed."
+
+  utter_food_suggestion:
+    - text: "🍕 You can try Pizza, Burger, Biryani or South Indian dishes today."
+
+  utter_offers:
+    - text: "🎁 Today's special offer: Get FLAT50 on orders above ₹299."
+
+  utter_delivery_time:
+    - text: "⏰ Most orders are delivered within 25 to 35 minutes."
+
+  utter_payment_methods:
+    - text: "💳 We support UPI, Debit/Credit Cards, Wallets and Cash on Delivery."
+
+  utter_cancel_order:
+    - text: "❌ Your cancellation request has been submitted successfully."
+
+  utter_change_address:
+    - text: "📍 Sure! Please send your updated delivery address."
+
+  utter_rate_order:
+    - text: "⭐ We'd love your feedback. Please rate your experience from 1 to 5."
+
+  utter_bot_capabilities:
+    - text: "🤖 I can help you order food, track orders, handle complaints and answer delivery questions."
+
+  utter_refund:
+    - text: "💰 Your refund request has been submitted for review."
+
+  utter_order_again:
+    - text: "🔁 Reordering your previous order."
+
+  utter_delivery_partner:
+    - text: "🚚 Connecting you with the delivery partner."
+
+  utter_restaurant_closed:
+    - text: "🏪 This restaurant is currently closed. Please try another one."
+
+  utter_unavailable_item:
+    - text: "❌ Sorry, this item is unavailable right now."
+
+  utter_coupon_not_working:
+    - text: "🎟 The coupon may have expired or may not be applicable to this order."
+
+  utter_account_issue:
+    - text: "🔐 Our support team will assist you with your account issue shortly."
+
+  utter_thank_you:
+    - text: "😊 Happy to help!"
+
+  utter_goodbye:
+    - text: "👋 Goodbye! Enjoy your meal and have a wonderful day."
+
+  utter_fallback:
+    - text: |
+        😅 Sorry, I couldn't understand that.
+
+        Here are a few things you can try:
+
+        🍔 Order food  
+        📦 Track order  
+        ⚠️ Raise a complaint  
+        💳 Payment help
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

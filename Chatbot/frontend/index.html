@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food AI Assistant</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f6f8fc, #e9eef5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 🔥 MAIN CARD */
+.chat-app {
+    width: 380px;
+    height: 640px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    overflow: hidden;
+    position: relative;
+}
+
+/* 🔥 HEADER */
+.header {
+    background: linear-gradient(135deg, #e23744, #ff5a5f);
+    color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    width: 35px;
+    margin-right: 10px;
+}
+
+.status {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* 🔥 CHAT */
+#chat {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: block;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 🔥 MESSAGES */
+.msg {
+    padding: 10px 14px;
+    border-radius: 15px;
+    max-width: 70%;
+    display: flex;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.user {
+    background: #e23744;
+    color: white;
+    margin-left: auto;
+}
+
+.bot {
+    background: #f1f1f1;
+}
+
+.avatar {
+    width: 25px;
+    margin-right: 8px;
+}
+
+/* 🔥 TYPING */
+.typing {
+    width: 60px;
+    display: flex;
+    gap: 5px;
+}
+
+.typing span {
+    width: 8px;
+    height: 8px;
+    background: #999;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+/* 🔥 QUICK ACTIONS */
+.actions {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.actions button {
+    border: none;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.actions button:hover {
+    background: #e23744;
+    color: white;
+}
+
+/* 🔥 RESTAURANT CARD */
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.card button {
+    width: 100%;
+    background: #e23744;
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* 🔥 INPUT */
+.input-area {
+    display: flex;
+    border-top: 1px solid #eee;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+}
+
+.send-btn {
+    background: #e23744;
+    color: white;
+    padding: 0 18px;
+}
+
+.mic-btn {
+    background: orange;
+    color: white;
+    padding: 0 12px;
+}
+
+/* 🔥 ADMIN BUTTON */
+.admin-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: white;
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 🔥 ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+    0%, 80%, 100% { opacity: 0; }
+    40% { opacity: 1; }
+}
+/* DARK MODE */
+
+.dark-mode{
+    background:#1e1e1e;
+    color:white;
+}
+
+.dark-mode .chat-container{
+    background:#2b2b2b;
+}
+
+.dark-mode .header{
+    background:#111;
+}
+
+.dark-mode .bot-message{
+    background:#3a3a3a;
+    color:white;
+}
+
+.dark-mode .input-area{
+    background:#2b2b2b;
+}
+
+.dark-mode input{
+    background:#444;
+    color:white;
+    border:none;
+}
+
+.dark-mode .quick-btn{
+    background:#333;
+    color:white;
+    border:1px solid #555;
+}
+/* 🌙 DARK MODE */
+.dark-mode {
+    background: #1e1e1e;
+    color: white;
+}
+
+/* CHAT AREA */
+.dark-mode #chat {
+    background: #2b2b2b;
+}
+
+/* BOT MESSAGE */
+.dark-mode .msg.bot {
+    background: #3a3a3a;
+    color: white;
+}
+
+/* USER MESSAGE */
+.dark-mode .msg.user {
+    background: #e23744;
+    color: white;
+}
+
+/* INPUT */
+.dark-mode input {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+/* BUTTONS */
+.dark-mode button {
+    color: white;
+}
+
+/* 🔥 FIX COMPLAINT TEXT */
+.dark-mode .msg.bot br,
+.dark-mode .msg.bot {
+    color: white !important;
+}
+/* 🔥 ACTION BUTTONS DARK MODE */
+.dark-mode .actions {
+    background: #2b2b2b;
+}
+
+.dark-mode .actions button {
+    background: #3a3a3a;
+    color: white;
+    border: 1px solid #555;
+}
+
+.dark-mode .actions button:hover {
+    background: #4a4a4a;
+}
+</style>
+</head>
+
+<body>
+
+<button class="admin-btn" onclick="goAdmin()">👨‍💼 Admin</button>
+
+<div class="chat-app">
+
+    <div class="header">
+        <div class="header-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+            <div>
+                <b>Food Assistant</b><br>
+                <span class="status">🟢 Online</span>
+            </div>
+        </div>
+        <button id="themeBtn" onclick="toggleTheme()">🌙</button>
+    </div>
+
+    <div id="chat"></div>
+
+   <div class="actions">
+
+    <button onclick="quickMsg('order food')">
+        🍔 Order
+    </button>
+
+    <button onclick="quickMsg('track order')">
+        📦 Track
+    </button>
+
+    <!-- 🔥 COMPLAINT FLOW -->
+    <button onclick="startComplaint()">
+        ⚠ Complaint
+    </button>
+
+</div>
+
+    <div class="input-area">
+        <input type="text" id="msg" placeholder="Ask anything...">
+        <button class="mic-btn" onclick="startVoice()">🎤</button>
+        <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+
+</div>
+
+<script>
+function goAdmin() {
+    window.open("dashboard.html", "_blank");
+}
+
+/* 🔥 TYPING EFFECT */
+function showTyping() {
+    let div = document.createElement("div");
+    div.className = "msg bot typing";
+
+    div.innerHTML = `
+        <span></span><span></span><span></span>
+    `;
+
+    document.getElementById("chat").appendChild(div);
+    return div;
+}
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -35,6 +35,12 @@
             border: none;
             cursor: pointer;
         }
+        .login-hint{
+    margin-top: 12px;
+    font-size: 13px;
+    color: gray;
+    text-align: center;
+}
     </style>
 </head>
 
@@ -49,6 +55,10 @@
     <button onclick="login()">Login</button>
 
     <p id="error" style="color:red;"></p>
+
+    <p class="login-hint">
+        Hint: Username = admin | Password = 1234
+    </p>
 </div>
 
 <script>

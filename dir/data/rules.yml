@@ -46,7 +46,11 @@ rules:
   steps:
   - intent: food_quality_issue
   - action: utter_food_quality_issue
+- rule: Track latest order
 
+  steps:
+    - intent: track_order
+    - action: action_track_order
 - rule: payment issue
   steps:
   - intent: payment_issue
